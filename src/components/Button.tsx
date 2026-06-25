@@ -82,8 +82,7 @@ export const Button: React.FC<ButtonProps> = ({
         ${isDisabled ? 'opacity-40' : 'opacity-100'}
         ${className}
       `}
-      style={({ pressed }) => pressed && !isDisabled ? { transform: [{ scale: 0.97 }] } : {}}
-    >
+      style={({ pressed }) => (pressed && !isDisabled ? { transform: [{ scale: 0.97 }] } : {})}>
       {loading ? (
         <ActivityIndicator
           size="small"
@@ -97,17 +96,13 @@ export const Button: React.FC<ButtonProps> = ({
         <View className="items-center justify-center">{icon}</View>
       ) : (
         <View className="flex-row items-center justify-center">
-          {icon && iconPosition === 'left' && (
-            <View className="mr-2">{icon}</View>
-          )}
+          {icon && iconPosition === 'left' && <View className="mr-2">{icon}</View>}
 
-          <Text className={`${currentTextStyle} ${currentSizeStyle.text} font-sans text-center`}>
+          <Text className={`${currentTextStyle} ${currentSizeStyle.text} text-center font-sans`}>
             {label}
           </Text>
 
-          {icon && iconPosition === 'right' && (
-            <View className="ml-2">{icon}</View>
-          )}
+          {icon && iconPosition === 'right' && <View className="ml-2">{icon}</View>}
         </View>
       )}
     </Pressable>

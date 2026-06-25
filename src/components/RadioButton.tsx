@@ -25,12 +25,10 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
   const borderStyle = disabled
     ? 'border-neutral-200'
     : selected
-    ? 'border-primary-600'
-    : 'border-neutral-300 active:border-primary-500';
+      ? 'border-primary-600'
+      : 'border-neutral-300 active:border-primary-500';
 
-  const bgStyle = disabled
-    ? 'bg-neutral-50'
-    : 'bg-white';
+  const bgStyle = disabled ? 'bg-neutral-50' : 'bg-white';
 
   return (
     <Pressable
@@ -40,27 +38,23 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
         flex-row items-center py-2
         ${disabled ? 'opacity-40' : 'opacity-100'}
         ${className}
-      `}
-    >
+      `}>
       <View
         className={`
-          w-5 h-5 border rounded-full items-center justify-center
+          h-5 w-5 items-center justify-center rounded-full border
           ${borderStyle} ${bgStyle}
-        `}
-      >
+        `}>
         {selected && (
           <View
             className={`
-              w-2.5 h-2.5 rounded-full
+              h-2.5 w-2.5 rounded-full
               ${disabled ? 'bg-neutral-300' : 'bg-primary-600'}
             `}
           />
         )}
       </View>
       {label && (
-        <Text className="ml-3 text-neutral-700 text-b2 font-sans font-medium">
-          {label}
-        </Text>
+        <Text className="ml-3 font-sans text-b2 font-medium text-neutral-700">{label}</Text>
       )}
     </Pressable>
   );

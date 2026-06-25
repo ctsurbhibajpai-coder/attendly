@@ -48,11 +48,10 @@ export const Toggle: React.FC<ToggleProps> = ({
       onPress={handlePress}
       disabled={disabled}
       className={`
-        w-[52px] h-[28px] justify-center rounded-full
+        h-[28px] w-[52px] justify-center rounded-full
         ${disabled ? 'opacity-40' : 'opacity-100'}
         ${className}
-      `}
-    >
+      `}>
       <Animated.View
         style={{
           backgroundColor,
@@ -60,8 +59,7 @@ export const Toggle: React.FC<ToggleProps> = ({
           height: '100%',
           borderRadius: 9999,
           justifyContent: 'center',
-        }}
-      >
+        }}>
         <Animated.View
           style={{
             transform: [{ translateX }],

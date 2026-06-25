@@ -24,18 +24,18 @@ export const colors = {
     900: '#0F172A',
   },
   success: {
-    light: '#D1FAE5',   // 100
+    light: '#D1FAE5', // 100
     DEFAULT: '#10B981', // 500
-    dark: '#065F46',    // 800
+    dark: '#065F46', // 800
   },
   warning: {
-    light: '#FEF3C7',   // 100
+    light: '#FEF3C7', // 100
     DEFAULT: '#F59E0B', // 500
-    dark: '#78350F',    // 800
+    dark: '#78350F', // 800
   },
   error: {
-    light: '#FEE2E2',   // 100
+    light: '#FEE2E2', // 100
     DEFAULT: '#EF4444', // 500
-    dark: '#7F1D1D',    // 800
+    dark: '#7F1D1D', // 800
   },
 };

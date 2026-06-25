@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  TextInput,
-  View,
-  Text,
-  Pressable,
-  TextInputProps,
-  Platform,
-} from 'react-native';
+import { TextInput, View, Text, Pressable, TextInputProps, Platform } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 export interface Country {
@@ -59,7 +52,7 @@ export const Input: React.FC<InputProps> = ({
   const [isFocused, setIsFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
-  
+
   // Default country is India (🇮🇳 +91), or controlled value if provided
   const [selectedCountry, setSelectedCountry] = useState<Country>(
     country || {
@@ -122,32 +115,34 @@ export const Input: React.FC<InputProps> = ({
   }
 
   return (
-    <View 
-      className="w-full mb-4"
-      style={{ zIndex: showCountryDropdown ? 999 : 1 }}
-    >
+    <View className="mb-4 w-full" style={{ zIndex: showCountryDropdown ? 999 : 1 }}>
       {label && (
-        <Text className={`text-b2 font-medium mb-1.5 font-sans ${error ? 'text-[#EF4444]' : 'text-neutral-700'}`}>
+        <Text
+          className={`mb-1.5 font-sans text-b2 font-medium ${error ? 'text-[#EF4444]' : 'text-neutral-700'}`}>
           {label}
         </Text>
       )}
 
       <View
         className={`
-          flex-row items-center border w-full relative
-          ${isTextArea ? 'rounded-2xl h-32 px-4 py-3' : 'rounded-full h-[52px] px-5'}
+          relative w-full flex-row items-center border
+          ${isTextArea ? 'h-32 rounded-2xl px-4 py-3' : 'h-[52px] rounded-full px-5'}
           ${borderClass}
-        `}
-      >
+        `}>
         {/* Country Flag & Country Code Dropdown Trigger */}
         {isPhone && (
           <Pressable
             onPress={() => isEditable && setShowCountryDropdown(!showCountryDropdown)}
-            className="flex-row items-center mr-3 pr-3 border-r border-neutral-200 h-full active:opacity-75"
-          >
-            <Text className="text-lg mr-1">{selectedCountry.flag}</Text>
-            <Text className="text-neutral-700 text-b2 font-sans font-medium mr-1">{selectedCountry.code}</Text>
-            <Feather name={showCountryDropdown ? 'chevron-up' : 'chevron-down'} size={12} color="#64748B" />
+            className="mr-3 h-full flex-row items-center border-r border-neutral-200 pr-3 active:opacity-75">
+            <Text className="mr-1 text-lg">{selectedCountry.flag}</Text>
+            <Text className="mr-1 font-sans text-b2 font-medium text-neutral-700">
+              {selectedCountry.code}
+            </Text>
+            <Feather
+              name={showCountryDropdown ? 'chevron-up' : 'chevron-down'}
+              size={12}
+              color="#64748B"
+            />
           </Pressable>
         )}
 
@@ -191,9 +186,8 @@ export const Input: React.FC<InputProps> = ({
         {isPassword && (
           <Pressable
             onPress={() => setShowPassword(!showPassword)}
-            className="p-1 active:opacity-60 ml-2"
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-          >
+            className="ml-2 p-1 active:opacity-60"
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
             <Feather
               name={showPassword ? 'eye' : 'eye-off'}
               size={18}
@@ -207,7 +201,7 @@ export const Input: React.FC<InputProps> = ({
         {/* Floating Country Dropdown Overlay following Design System light mode tokens */}
         {isPhone && showCountryDropdown && (
           <View
-            className="absolute left-4 top-[54px] w-[240px] bg-white border border-neutral-200 rounded-2xl shadow-xl p-1.5"
+            className="absolute left-4 top-[54px] w-[240px] rounded-2xl border border-neutral-200 bg-white p-1.5 shadow-xl"
             style={{
               shadowColor: '#000',
               shadowOffset: { width: 0, height: 4 },
@@ -215,29 +209,24 @@ export const Input: React.FC<InputProps> = ({
               shadowRadius: 8,
               elevation: 10,
               zIndex: 9999,
-            }}
-          >
+            }}>
             {COUNTRIES.map((item) => {
               const isSelected = selectedCountry.name === item.name;
               return (
                 <Pressable
                   key={item.name}
                   onPress={() => selectCountry(item)}
-                  className={`flex-row items-center px-3 py-2.5 my-0.5 rounded-xl active:opacity-85 ${
+                  className={`my-0.5 flex-row items-center rounded-xl px-3 py-2.5 active:opacity-85 ${
                     isSelected ? 'bg-primary-50' : 'bg-transparent'
-                  }`}
-                >
-                  <Text className="text-lg mr-3">{item.flag}</Text>
+                  }`}>
+                  <Text className="mr-3 text-lg">{item.flag}</Text>
                   <Text
-                    className={`text-sm font-sans font-semibold flex-1 ${
+                    className={`flex-1 font-sans text-sm font-semibold ${
                       isSelected ? 'text-primary-600' : 'text-neutral-800'
-                    }`}
-                  >
+                    }`}>
                     {item.name} ({item.code})
                   </Text>
-                  {isSelected && (
-                    <Feather name="check" size={14} color="#4F46E5" />
-                  )}
+                  {isSelected && <Feather name="check" size={14} color="#4F46E5" />}
                 </Pressable>
               );
             })}
@@ -246,13 +235,9 @@ export const Input: React.FC<InputProps> = ({
       </View>
 
       {error ? (
-        <Text className="text-b4 text-[#EF4444] mt-1.5 ml-2 font-medium font-sans">
-          {error}
-        </Text>
+        <Text className="ml-2 mt-1.5 font-sans text-b4 font-medium text-[#EF4444]">{error}</Text>
       ) : helperText ? (
-        <Text className="text-b4 text-neutral-500 mt-1.5 ml-2 font-sans">
-          {helperText}
-        </Text>
+        <Text className="ml-2 mt-1.5 font-sans text-b4 text-neutral-500">{helperText}</Text>
       ) : null}
     </View>
   );

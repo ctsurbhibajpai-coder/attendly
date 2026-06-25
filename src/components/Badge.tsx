@@ -21,7 +21,10 @@ export const Badge: React.FC<BadgeProps> = ({
   className = '',
 }) => {
   // Styling mappings based on type and variant
-  const stylesMap: Record<BadgeType, Record<BadgeVariant, { bg: string; border: string; text: string }>> = {
+  const stylesMap: Record<
+    BadgeType,
+    Record<BadgeVariant, { bg: string; border: string; text: string }>
+  > = {
     primary: {
       solid: { bg: 'bg-primary', border: 'border-transparent', text: 'text-white' },
       subtle: { bg: 'bg-primary-light', border: 'border-transparent', text: 'text-primary' },
@@ -71,14 +74,14 @@ export const Badge: React.FC<BadgeProps> = ({
   return (
     <View
       className={`
-        self-start flex-row items-center justify-center rounded-full
+        flex-row items-center justify-center self-start rounded-full
         ${currentStyles.bg}
         ${currentStyles.border}
         ${currentSize.container}
         ${className}
-      `}
-    >
-      <Text className={`${currentStyles.text} ${currentSize.text} font-sans uppercase tracking-wider`}>
+      `}>
+      <Text
+        className={`${currentStyles.text} ${currentSize.text} font-sans uppercase tracking-wider`}>
         {label}
       </Text>
     </View>

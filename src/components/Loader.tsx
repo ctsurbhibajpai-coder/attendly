@@ -91,7 +91,7 @@ export const Loader: React.FC<LoaderProps> = ({
     const spacing = size === 'sm' ? 'mx-1' : size === 'md' ? 'mx-1.5' : 'mx-2';
 
     return (
-      <View className={`flex-row items-center justify-center h-10 ${className}`}>
+      <View className={`h-10 flex-row items-center justify-center ${className}`}>
         <Animated.View
           style={[
             {
@@ -145,8 +145,7 @@ export const Loader: React.FC<LoaderProps> = ({
     return (
       <View
         style={{ width: barWidth, height: barHeight }}
-        className={`bg-slate-100 overflow-hidden rounded-full justify-center ${className}`}
-      >
+        className={`justify-center overflow-hidden rounded-full bg-slate-100 ${className}`}>
         <Animated.View
           style={[
             {
