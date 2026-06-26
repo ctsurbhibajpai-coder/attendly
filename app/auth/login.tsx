@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, View, Pressable, StatusBar, SafeAreaView, Image } from 'react-native';
+import { Text, View, Pressable, StatusBar, Image } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { FontAwesome, Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
@@ -26,7 +27,7 @@ export default function LoginScreen({ onNavigate }: LoginScreenProps) {
 
   const handleEmailLogin = () => {
     if (router) {
-      router.push('/design-system');
+      router.push('/auth/email');
     } else if (onNavigate) {
       onNavigate();
     }
@@ -36,16 +37,7 @@ export default function LoginScreen({ onNavigate }: LoginScreenProps) {
     <View className="flex-1 bg-white">
       <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
 
-      {/* Soft Purple/Lavender Glow at the Top */}
-      <View
-        className="absolute left-0 right-0 top-0 h-[42%] bg-[#EEF2FF]"
-        style={{
-          borderBottomLeftRadius: 180,
-          borderBottomRightRadius: 180,
-          transform: [{ scaleX: 1.5 }],
-          opacity: 0.7,
-        }}
-      />
+
 
       <SafeAreaView className="flex-1 justify-between px-8 pb-8">
         {/* Top Spacer / Graphic Area */}
@@ -53,12 +45,12 @@ export default function LoginScreen({ onNavigate }: LoginScreenProps) {
           {/* Custom Envelope Graphic Image */}
           <Image
             source={require('../../assets/login-graphic.png')}
-            className="h-44 w-52"
+            className="h-56 w-64"
             resizeMode="contain"
           />
 
           {/* Title & Subtitle */}
-          <Text className="mt-8 text-center font-sans text-[32px] font-bold leading-[40px] tracking-tight text-neutral-900">
+          <Text className="-mt-6 text-center font-sans text-[32px] font-bold leading-[40px] tracking-tight text-neutral-900">
             Verify your email
           </Text>
           <Text className="mt-3 text-center font-sans text-[15px] font-normal leading-[22px] text-neutral-500">
@@ -83,7 +75,7 @@ export default function LoginScreen({ onNavigate }: LoginScreenProps) {
               },
             ]}>
             <FontAwesome name="google" size={18} color="white" style={{ marginRight: 8 }} />
-            <Text className="font-sans text-[16px] font-semibold tracking-wide text-white">
+            <Text className="font-sans text-[16px] font-bold tracking-wide text-white">
               Continue with Google
             </Text>
           </Pressable>
@@ -98,7 +90,7 @@ export default function LoginScreen({ onNavigate }: LoginScreenProps) {
               },
             ]}>
             <Feather name="mail" size={18} color="#1E293B" style={{ marginRight: 8 }} />
-            <Text className="font-sans text-[16px] font-semibold tracking-wide text-[#1E293B]">
+            <Text className="font-sans text-[16px] font-bold tracking-wide text-[#1E293B]">
               Continue with Email
             </Text>
           </Pressable>

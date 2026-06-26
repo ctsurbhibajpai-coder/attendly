@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { View, StatusBar, Image } from 'react-native';
 import { useRouter } from 'expo-router';
+// import '../global.css';
+
 
 export default function IndexScreen() {
   const router = useRouter();

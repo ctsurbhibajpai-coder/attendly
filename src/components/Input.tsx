@@ -97,8 +97,8 @@ export const Input: React.FC<InputProps> = ({
   let borderClass = 'border-neutral-200 bg-white';
   if (isFocused) {
     borderClass = error
-      ? 'border-[#EF4444] bg-white ring-2 ring-red-100'
-      : 'border-primary-500 bg-white ring-2 ring-primary-100';
+      ? 'border-[#EF4444] bg-white'
+      : 'border-primary-500 bg-white';
   } else if (error) {
     borderClass = 'border-[#EF4444] bg-red-50/10';
   } else if (!isEditable) {
