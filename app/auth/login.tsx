@@ -37,8 +37,6 @@ export default function LoginScreen({ onNavigate }: LoginScreenProps) {
     <View className="flex-1 bg-white">
       <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
 
-
-
       <SafeAreaView className="flex-1 justify-between px-8 pb-8">
         {/* Top Spacer / Graphic Area */}
         <View className="flex-1 items-center justify-center pt-10">

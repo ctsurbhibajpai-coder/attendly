@@ -13,38 +13,42 @@ import { useRouter } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 import { Input } from '../../src/components/Input';
 
-export default function ForgotPasswordScreen() {
+export default function TeacherLoginScreen() {
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
+  const [teacherId, setTeacherId] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleResetPassword = () => {
+  const [teacherIdError, setTeacherIdError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+  const handleSignIn = () => {
     let isValid = true;
 
-    if (!email) {
-      setEmailError('Email address is required');
+    if (!teacherId) {
+      setTeacherIdError('Teacher ID is required');
       isValid = false;
     } else {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        setEmailError('Please enter a valid email address');
-        isValid = false;
-      } else {
-        setEmailError('');
-      }
+      setTeacherIdError('');
+    }
+
+    if (!password) {
+      setPasswordError('Password is required');
+      isValid = false;
+    } else {
+      setPasswordError('');
     }
 
     if (isValid) {
-      // Simulate sending OTP and route to verify screen
-      router.push('/auth/verify-otp');
+      // Navigate to teacher dashboard
+      router.push('/teacher/dashboard');
     }
   };
 
-  const handleBackToLogin = () => {
+  const handleBack = () => {
     if (router.canGoBack()) {
       router.back();
     } else {
-      router.push('/auth/email');
+      router.push('/auth/role-selection');
     }
   };
 
@@ -65,7 +69,7 @@ export default function ForgotPasswordScreen() {
           {/* Header Navigation Area */}
           <View className="flex-row items-center px-6 py-4">
             <Pressable
-              onPress={handleBackToLogin}
+              onPress={handleBack}
               className="h-10 w-10 items-center justify-center rounded-full bg-neutral-100 active:opacity-60">
               <Feather name="arrow-left" size={20} color="#1E293B" />
             </Pressable>
@@ -79,31 +83,55 @@ export default function ForgotPasswordScreen() {
             <View className="px-8 pb-6 pt-4">
               {/* Title & Subtitle */}
               <Text className="font-sans text-[32px] font-bold leading-[38px] tracking-tight text-neutral-900">
-                Reset Password
+                Teacher Sign In
               </Text>
               <Text className="mt-3 font-sans text-[15px] font-normal leading-[22px] text-neutral-500">
-                {
-                  "Enter your registered email address below, and we'll send you an OTP code to reset your password."
-                }
+                Enter your Teacher ID and password to access your attendance dashboard.
               </Text>
 
               {/* Form Fields */}
               <View className="mt-8">
-                {/* Email Input Field */}
+                {/* Teacher ID Input Field */}
                 <Input
-                  label="Email Address"
-                  placeholder="name@example.com"
-                  type="email"
-                  value={email}
+                  label="Teacher ID"
+                  placeholder="e.g. TCH1024"
+                  value={teacherId}
                   onChangeText={(text) => {
-                    setEmail(text);
-                    if (emailError) setEmailError('');
+                    setTeacherId(text);
+                    if (teacherIdError) setTeacherIdError('');
                   }}
-                  error={emailError}
-                  autoCapitalize="none"
+                  error={teacherIdError}
+                  autoCapitalize="characters"
                   autoCorrect={false}
-                  keyboardType="email-address"
                 />
+
+                {/* Password Input Field */}
+                <View className="mt-4">
+                  <Input
+                    label="Password"
+                    placeholder="••••••••"
+                    value={password}
+                    onChangeText={(text) => {
+                      setPassword(text);
+                      if (passwordError) setPasswordError('');
+                    }}
+                    error={passwordError}
+                    isPassword={true}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                  />
+                </View>
+
+                {/* Forgot Password Link - Aligned Right for natural thumb reach */}
+                <View className="mt-1 flex-row justify-end">
+                  <Pressable
+                    onPress={() => router.push('/auth/forgot-password')}
+                    className="py-1 active:opacity-60">
+                    <Text className="font-sans text-sm font-normal text-[#818CF8]">
+                      Forgot Password?
+                    </Text>
+                  </Pressable>
+                </View>
               </View>
             </View>
 
@@ -111,7 +139,7 @@ export default function ForgotPasswordScreen() {
             <View className="mt-auto px-8 pb-8 pt-4">
               {/* Primary Action Button */}
               <Pressable
-                onPress={handleResetPassword}
+                onPress={handleSignIn}
                 className="h-14 w-full flex-row items-center justify-center rounded-full bg-[#4F46E5]"
                 style={({ pressed }) => [
                   {
@@ -124,7 +152,7 @@ export default function ForgotPasswordScreen() {
                   },
                 ]}>
                 <Text className="font-sans text-[16px] font-bold tracking-wide text-white">
-                  Send OTP
+                  Sign In
                 </Text>
               </Pressable>
             </View>
